@@ -180,6 +180,9 @@ public class ListViewActivity extends Activity {
             return convertView;
         }
 
+
+
+
         private class ViewHolder{
             ImageView listview_item_iv;
             TextView listview_item_tv;
