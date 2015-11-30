@@ -19,11 +19,12 @@ import com.example.sym.myapplication.R;
 import com.imageloader.util.Constants;
 import com.nostra13.universalimageloader.cache.disc.DiskCache;
 import com.nostra13.universalimageloader.cache.disc.impl.ext.LruDiskCache;
-import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
+import com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
 import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
 import java.io.File;
@@ -65,6 +66,10 @@ public class ListViewActivity extends Activity {
         File cacheDir = new File(Environment.getExternalStorageDirectory().getAbsolutePath() + "/myApplication");
         // 设置 DisplayImageOptions
         DisplayImageOptions displayImageOptions = new DisplayImageOptions.Builder()
+                // 设置图片的缩放比例（这里设置的对原图不做缩放，会将整个原图载入到内存）
+                //.imageScaleType(ImageScaleType.NONE)
+                // 设置图片的缩放比例（这是设置的是原图的1/2，这样比较省内存）
+                .imageScaleType(ImageScaleType.IN_SAMPLE_POWER_OF_2)
                 // 默认是 false（是否使用内存缓存）
                 .cacheInMemory(true)
                 // 默认是 false（是否使用磁盘缓存）
@@ -77,7 +82,7 @@ public class ListViewActivity extends Activity {
         // 设置默认的 defaultDisplayImageOptions
         builder.defaultDisplayImageOptions(displayImageOptions);
         // 设置 memoryCache
-        builder.memoryCache(new LruMemoryCache( 10 * 1024 * 1024));
+        builder.memoryCache(new LruMemoryCache(10 * 1024 * 1024));
         // 设置 memoryCache
         //builder.memoryCacheSize(2 * 1024 * 1024);
         // 设置 memoryCache
@@ -94,10 +99,18 @@ public class ListViewActivity extends Activity {
         //builder.diskCacheExtraOptions();
         // 设置磁盘缓存（我这里设置的是不受限制的）
         //builder.diskCache(new UnlimitedDiskCache(cacheDir));//default
+        // 设置磁盘缓存（不受限制的磁盘缓存，文件的名字以Md5 命名）
+        //builder.diskCache(new UnlimitedDiskCache(cacheDir, cacheDir,new Md5FileNameGenerator()));
 
         // 设置磁盘缓存（这是设置的是受限制的）
         try {
-            builder.diskCache(new LruDiskCache(cacheDir,new Md5FileNameGenerator(),100 * 1024 * 1024));
+            builder.diskCache(new LruDiskCache(cacheDir, new FileNameGenerator() {
+                @Override
+                public String generate(String imageUri) {
+                    Log.e("ListViewActivity", imageUri);
+                    return String.valueOf(imageUri.hashCode());
+                }
+            }, 100 * 1024 * 1024));
         } catch (IOException e) {
             e.printStackTrace();
         }
