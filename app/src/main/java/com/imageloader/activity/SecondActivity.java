@@ -1,7 +1,9 @@
-package com.example.sym.myapplication;
+package com.imageloader.activity;
 
 import android.app.Activity;
 import android.os.Bundle;
+
+import com.example.sym.myapplication.R;
 
 public class SecondActivity extends Activity {
 
