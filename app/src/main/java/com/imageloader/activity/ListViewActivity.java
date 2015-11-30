@@ -1,4 +1,4 @@
-package com.example.sym.myapplication;
+package com.imageloader.activity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -15,8 +15,10 @@ import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.example.sym.myapplication.R;
+import com.imageloader.util.Constants;
 import com.nostra13.universalimageloader.cache.disc.DiskCache;
-import com.nostra13.universalimageloader.cache.disc.impl.UnlimitedDiskCache;
+import com.nostra13.universalimageloader.cache.disc.impl.ext.LruDiskCache;
 import com.nostra13.universalimageloader.cache.disc.naming.Md5FileNameGenerator;
 import com.nostra13.universalimageloader.cache.memory.impl.LruMemoryCache;
 import com.nostra13.universalimageloader.core.DisplayImageOptions;
@@ -25,6 +27,7 @@ import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
 
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by Sym on 2015/11/29.
@@ -74,7 +77,7 @@ public class ListViewActivity extends Activity {
         // 设置默认的 defaultDisplayImageOptions
         builder.defaultDisplayImageOptions(displayImageOptions);
         // 设置 memoryCache
-        builder.memoryCache(new LruMemoryCache(2 * 1024 * 1024));
+        builder.memoryCache(new LruMemoryCache( 10 * 1024 * 1024));
         // 设置 memoryCache
         //builder.memoryCacheSize(2 * 1024 * 1024);
         // 设置 memoryCache
@@ -90,14 +93,22 @@ public class ListViewActivity extends Activity {
         // Sets options for resizing/compressing of downloaded images before saving to disk cache.
         //builder.diskCacheExtraOptions();
         // 设置磁盘缓存（我这里设置的是不受限制的）
-        builder.diskCache(new UnlimitedDiskCache(cacheDir));//default
+        //builder.diskCache(new UnlimitedDiskCache(cacheDir));//default
+
+        // 设置磁盘缓存（这是设置的是受限制的）
+        try {
+            builder.diskCache(new LruDiskCache(cacheDir,new Md5FileNameGenerator(),100 * 1024 * 1024));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
         // 设置磁盘缓存文件大小（我这里设置的是 50 MB）
-        builder.diskCacheSize(50 * 1024 * 1024);
+        //builder.diskCacheSize(50 * 1024 * 1024);
         // 设置磁盘缓存文件的总个数
-        builder.diskCacheFileCount(10);
+        //builder.diskCacheFileCount(10);
         // 设置磁盘缓存文件的名称
-        //builder.diskCacheFileNameGenerator(new HashCodeFileNameGenerator());//default
-        builder.diskCacheFileNameGenerator(new Md5FileNameGenerator());
+        //builder.diskCacheFileNameGenerator(new HashCodeFileNameGenerator());//default（使用 hashcode ）
+        //builder.diskCacheFileNameGenerator(new Md5FileNameGenerator());
         // 不知道这个参数是干什么的。
         builder.tasksProcessingOrder(QueueProcessingType.FIFO);
         // 设置线程的优先级别 Thread.MIN_PRIORITY（常数1），Thread.MAX_PRIORITY（常数10），Thread.NORM_PRIORITY（常数5）。
@@ -148,7 +159,7 @@ public class ListViewActivity extends Activity {
 
         @Override
         public int getCount() {
-            return 100;
+            return 40;
         }
 
         @Override
@@ -175,7 +186,7 @@ public class ListViewActivity extends Activity {
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
-            ImageLoader.getInstance().displayImage("http://192.168.31.129:8080/QiuBaiServer/pictures/2755615_172733053_2.jpg", viewHolder.listview_item_iv);
+            ImageLoader.getInstance().displayImage(Constants.images[position], viewHolder.listview_item_iv);
             viewHolder.listview_item_tv.setText("This is just test!");
             return convertView;
         }
@@ -184,6 +195,11 @@ public class ListViewActivity extends Activity {
             ImageView listview_item_iv;
             TextView listview_item_tv;
         }
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     @Override
@@ -200,4 +216,5 @@ public class ListViewActivity extends Activity {
     protected void onDestroy() {
         super.onDestroy();
     }
+
 }
