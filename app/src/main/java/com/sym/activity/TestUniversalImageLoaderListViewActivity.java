@@ -1,6 +1,5 @@
 package com.sym.activity;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -16,7 +15,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 
 import com.example.sym.myapplication.R;
-import com.sym.util.Constants;
 import com.nostra13.universalimageloader.cache.disc.DiskCache;
 import com.nostra13.universalimageloader.cache.disc.impl.ext.LruDiskCache;
 import com.nostra13.universalimageloader.cache.disc.naming.FileNameGenerator;
@@ -26,6 +24,8 @@ import com.nostra13.universalimageloader.core.ImageLoader;
 import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
 import com.nostra13.universalimageloader.core.assist.ImageScaleType;
 import com.nostra13.universalimageloader.core.assist.QueueProcessingType;
+import com.sym.manager.ActivityManager;
+import com.sym.util.Constants;
 
 import java.io.File;
 import java.io.IOException;
@@ -34,7 +34,7 @@ import java.io.IOException;
  * 测试使用 Universal Image Loader
  * Created by Sym on 2015/11/29.
  */
-public class TestUniversalImageLoaderListViewActivity extends Activity {
+public class TestUniversalImageLoaderListViewActivity extends BaseActivity {
 
     private ListView listView;
     private MyBaseAdapter myBaseAdapter;
@@ -43,6 +43,7 @@ public class TestUniversalImageLoaderListViewActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listview);
+        ActivityManager.getInstance().add(this);
         init();
     }
 
@@ -108,7 +109,7 @@ public class TestUniversalImageLoaderListViewActivity extends Activity {
             builder.diskCache(new LruDiskCache(cacheDir, new FileNameGenerator() {
                 @Override
                 public String generate(String imageUri) {
-                    Log.e("TestUniversalImageLoaderListViewActivity", imageUri);
+                    Log.e("TestUILListViewActivity", imageUri);
                     return String.valueOf(imageUri.hashCode());
                 }
             }, 100 * 1024 * 1024));
@@ -194,20 +195,20 @@ public class TestUniversalImageLoaderListViewActivity extends Activity {
             if(convertView == null){
                 convertView = inflater.inflate(R.layout.listivew_item, null);
                 viewHolder = new ViewHolder();
-                viewHolder.listview_item_iv = (ImageView) convertView.findViewById(R.id.listview_item_iv);
-                viewHolder.listview_item_tv = (TextView) convertView.findViewById(R.id.listview_item_tv);
+                viewHolder.list_view_item_iv = (ImageView) convertView.findViewById(R.id.listview_item_iv);
+                viewHolder.list_view_item_tv = (TextView) convertView.findViewById(R.id.listview_item_tv);
                 convertView.setTag(viewHolder);
             } else {
                 viewHolder = (ViewHolder) convertView.getTag();
             }
-            ImageLoader.getInstance().displayImage(Constants.images[position], viewHolder.listview_item_iv);
-            viewHolder.listview_item_tv.setText("This is just test!");
+            ImageLoader.getInstance().displayImage(Constants.images[position], viewHolder.list_view_item_iv);
+            viewHolder.list_view_item_tv.setText("This is just test!");
             return convertView;
         }
 
         private class ViewHolder{
-            ImageView listview_item_iv;
-            TextView listview_item_tv;
+            ImageView list_view_item_iv;
+            TextView list_view_item_tv;
         }
     }
 

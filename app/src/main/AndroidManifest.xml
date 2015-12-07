@@ -20,8 +20,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.sym.activity.TestUniversalImageLoaderListViewActivity"></activity>
-        <activity android:name="com.sym.activity.TestAndroidAsyncHttpActivity"></activity>
+        <activity android:name="com.sym.activity.TestUniversalImageLoaderListViewActivity" />
+        <activity android:name="com.sym.activity.TestAndroidAsyncHttpActivity" />
+        <activity android:name="com.sym.activity.BaseActivity"></activity>
     </application>
 
 </manifest>
