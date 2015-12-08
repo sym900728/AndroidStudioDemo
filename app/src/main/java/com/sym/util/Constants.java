@@ -1,4 +1,4 @@
-package com.imageloader.util;
+package com.sym.util;
 
 /**
  * Created by Administrator on 2015/11/30.

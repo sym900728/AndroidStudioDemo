@@ -5,15 +5,15 @@
     android:orientation="vertical">
 
     <Button
-        android:id="@+id/main_test1_btn"
+        android:id="@+id/btn_test1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Test 1" />
 
     <Button
-        android:id="@+id/main_test2_btn"
+        android:id="@+id/btn_cancel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Test 2" />
+        android:text="Cancel" />
 
 </LinearLayout>

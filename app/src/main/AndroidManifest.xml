@@ -10,17 +10,19 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name="com.imageloader.activity.MainActivity">
+        <activity android:name="com.sym.activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.imageloader.activity.ListViewActivity"></activity>
-        <activity android:name="com.imageloader.activity.SecondActivity"></activity>
+        <activity android:name="com.sym.activity.TestUniversalImageLoaderListViewActivity" />
+        <activity android:name="com.sym.activity.TestAndroidAsyncHttpActivity" />
+        <activity android:name="com.sym.activity.BaseActivity"></activity>
     </application>
 
 </manifest>
