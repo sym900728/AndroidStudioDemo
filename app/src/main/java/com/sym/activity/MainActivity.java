@@ -77,6 +77,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     protected void finishActivity(String activityName) {
+        Log.e(TAG, "ok");
         Log.e(TAG, activityName);
         super.finishActivity(activityName);
     }
