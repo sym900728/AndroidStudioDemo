@@ -14,7 +14,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = "MainActivity";
 
-    private Button test1, test2;
+    private Button test1, test2, test3;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,16 +24,32 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         init();
     }
 
-    private void init() {
-        test1 = (Button) findViewById(R.id.main_test1_btn);
-        test1.setOnClickListener(this);
-        test2 = (Button) findViewById(R.id.main_test2_btn);
-        test2.setOnClickListener(this);
+    @Override
+    protected void onStart() {
+        super.onStart();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+    }
+
+    private void init() {
+        test1 = (Button) findViewById(R.id.main_test1_btn);
+        test1.setOnClickListener(this);
+        test2 = (Button) findViewById(R.id.main_test2_btn);
+        test2.setOnClickListener(this);
+        findViewById(R.id.main_test3_btn).setOnClickListener(this);
     }
 
     @Override
@@ -52,6 +68,10 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
                 Intent intent2 = new Intent(MainActivity.this, TestAndroidAsyncHttpActivity.class);
                 startActivity(intent2);
                 break;
+            case R.id.main_test3_btn:
+                Intent intent3 = new Intent(MainActivity.this, TestRubberIndicatorActivity.class);
+                startActivity(intent3);
+                break;
         }
     }
 
@@ -60,4 +80,5 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         Log.e(TAG, activityName);
         super.finishActivity(activityName);
     }
+
 }

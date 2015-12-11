@@ -1,7 +1,7 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 18
+    compileSdkVersion 23
     buildToolsVersion "23.0.1"
 
     defaultConfig {
@@ -20,7 +20,10 @@ android {
 }
 
 dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
     compile files('libs/httpclient-4.4.1.1.jar')
     compile files('libs/universal-image-loader-1.9.5.jar')
     compile files('libs/android-async-http-1.4.9.jar')
+    compile 'com.android.support:appcompat-v7:23.1.1'
+    compile 'com.android.support:support-v4:23.1.1'
 }
