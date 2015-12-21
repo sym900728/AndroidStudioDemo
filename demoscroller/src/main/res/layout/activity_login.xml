@@ -1,0 +1,96 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:orientation="vertical">
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:layout_marginTop="100dp">
+
+        <RelativeLayout
+            android:id="@+id/login_phone_rel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="手机号"
+                android:inputType="number"
+                android:singleLine="true" />
+
+            <RelativeLayout
+                android:id="@+id/login_drop_account_rel"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:src="@mipmap/login_arrow_down" />
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <EditText
+            android:id="@+id/login_password_et"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/login_phone_rel"
+            android:hint="密码"
+            android:inputType="textPassword"
+            android:singleLine="true" />
+
+        <Button
+            android:id="@+id/login_login_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/login_password_et"
+            android:text="登录" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/login_login_btn">
+
+            <TextView
+                android:id="@+id/login_forgetpassword_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentLeft="true"
+                android:gravity="center_vertical"
+                android:text="忘记密码？" />
+
+            <TextView
+                android:id="@+id/login_register_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_alignParentRight="true"
+                android:gravity="center_vertical"
+                android:text="快捷注册" />
+
+        </RelativeLayout>
+
+        <com.sym.view.ScrollerLayout
+            android:id="@+id/login_scroller_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/login_phone_rel"
+            android:visibility="invisible">
+
+            <ListView
+                android:id="@+id/login_listview"
+                android:layout_width="match_parent"
+                android:layout_height="120dp" />
+
+        </com.sym.view.ScrollerLayout>
+    </RelativeLayout>
+</LinearLayout>
