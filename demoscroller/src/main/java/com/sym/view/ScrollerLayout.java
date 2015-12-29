@@ -36,6 +36,14 @@ public class ScrollerLayout extends RelativeLayout {
         this.scroller = new Scroller(context);
     }
 
+    /**
+     * 设置动画的执行时间
+     * @param duration
+     */
+    public void setAnimationDuration(int duration) {
+        this.animationDuration = duration;
+    }
+
     public void open() {
         if(!isMoving){
 

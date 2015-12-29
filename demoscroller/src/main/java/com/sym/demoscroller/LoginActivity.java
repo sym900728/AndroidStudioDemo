@@ -40,6 +40,7 @@ public class LoginActivity extends Activity {
     private void init() {
         loginListViewAdapter = new LoginListViewAdapter(this);
         loginListView.setAdapter(loginListViewAdapter);
+        loginScrollerLayout.setAnimationDuration(800);
     }
 
     @OnClick(R.id.login_drop_account_rel)
