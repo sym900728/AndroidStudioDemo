@@ -5,16 +5,19 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import com.example.sym.myapplication.R;
 import com.sym.manager.ActivityManager;
+import com.sym.view.CanvasView;
 
 public class MainActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = "MainActivity";
 
     private Button test1, test2, test3;
+    private LinearLayout content;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,6 +53,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         test2 = (Button) findViewById(R.id.main_test2_btn);
         test2.setOnClickListener(this);
         findViewById(R.id.main_test3_btn).setOnClickListener(this);
+        content = (LinearLayout) findViewById(R.id.content);
+        CanvasView canvasView = new CanvasView(this);
+        canvasView.setMinimumHeight(1000);
+        canvasView.setMinimumWidth(1000);
+        content.addView(canvasView);
     }
 
     @Override
