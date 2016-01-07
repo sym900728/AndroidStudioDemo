@@ -1,13 +1,53 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<!--<com.sym.view.BounceLinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/linLay"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="#0000FF"
     android:orientation="vertical">
 
-    <Button
-        android:id="@+id/main_login"
+    <com.sym.view.BounceScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="去登录界面" />
+        android:layout_height="match_parent"
+        android:background="#FF0000">
 
-</LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/main_login"
+                android:layout_width="match_parent"
+                android:layout_height="1000dp"
+                android:text="去登录界面" />
+
+        </LinearLayout>
+
+    </com.sym.view.BounceScrollView>
+</com.sym.view.BounceLinearLayout>-->
+<com.sym.view.FlingLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#0000FF">
+
+    <com.sym.view.PullableScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:overScrollMode="never"
+        android:background="#FF0000">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/main_login"
+                android:layout_width="match_parent"
+                android:layout_height="1000dp"
+                android:text="去登录界面" />
+
+        </LinearLayout>
+
+    </com.sym.view.PullableScrollView>
+</com.sym.view.FlingLayout>
