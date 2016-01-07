@@ -22,6 +22,18 @@
         android:layout_height="wrap_content"
         android:text="Test 3" />
 
+    <Button
+        android:id="@+id/main_test_scrollview_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Test Scroll View" />
+
+    <Button
+        android:id="@+id/main_test_second_scrollview_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Test Second Scroll View" />
+
     <LinearLayout
         android:id="@+id/content"
         android:layout_width="match_parent"

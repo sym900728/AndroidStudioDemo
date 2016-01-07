@@ -25,6 +25,8 @@
         <activity android:name="com.sym.activity.BaseActivity" />
         <activity android:name="com.sym.activity.GridueActivity" />
         <activity android:name="com.sym.activity.TestRubberIndicatorActivity" />
+        <activity android:name="com.sym.activity.TestBounceScrollViewActivity" />
+        <activity android:name="com.sym.activity.TestSecondBounceScrollViewActivity" />
     </application>
 
 </manifest>

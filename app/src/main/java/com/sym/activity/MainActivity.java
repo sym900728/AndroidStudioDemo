@@ -17,6 +17,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
     private static final String TAG = "MainActivity";
 
     private Button test1, test2, test3;
+    private Button test_scrollview;
+    private Button test_second;
     private LinearLayout content;
 
     @Override
@@ -52,6 +54,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
         test1.setOnClickListener(this);
         test2 = (Button) findViewById(R.id.main_test2_btn);
         test2.setOnClickListener(this);
+
+        test_scrollview = (Button) findViewById(R.id.main_test_scrollview_btn);
+        test_scrollview.setOnClickListener(this);
+        test_second = (Button) findViewById(R.id.main_test_second_scrollview_btn);
+        test_second.setOnClickListener(this);
+
         findViewById(R.id.main_test3_btn).setOnClickListener(this);
         content = (LinearLayout) findViewById(R.id.content);
         CanvasView canvasView = new CanvasView(this);
@@ -79,6 +87,14 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
             case R.id.main_test3_btn:
                 Intent intent3 = new Intent(MainActivity.this, TestRubberIndicatorActivity.class);
                 startActivity(intent3);
+                break;
+            case R.id.main_test_scrollview_btn:
+                Intent intent4 = new Intent(MainActivity.this, TestBounceScrollViewActivity.class);
+                startActivity(intent4);
+                break;
+            case R.id.main_test_second_scrollview_btn:
+                Intent intent5 = new Intent(MainActivity.this, TestSecondBounceScrollViewActivity.class);
+                startActivity(intent5);
                 break;
         }
     }
