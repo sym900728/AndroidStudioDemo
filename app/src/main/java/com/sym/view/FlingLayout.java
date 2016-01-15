@@ -34,10 +34,11 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.FrameLayout;
 import android.widget.Scroller;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class FlingLayout extends FrameLayout {
 
-    private int actionUpScrollY;
-    private long actionUpTime;
     private int mOffsetTop;
 
 
@@ -218,8 +219,38 @@ public class FlingLayout extends FrameLayout {
         return time;
     }
 
+    public int startScrollBy2(int startY, int dy) {
+        setState(FLING, startY + dy);
+        int duration = Math.abs(dy);
+        int time = 0;
+        if (duration >= 200 ){
+            time = 200;
+        } else if (duration <= 100) {
+            time = 100;
+        } else {
+            time = 150;
+        }
+        mScroller.startScroll(0, startY, 0, dy, time);
+        invalidate();
+        return time;
+    }
+
     public int startScrollTo(int startY, int endY) {
         return startScrollBy(startY, endY - startY);
+    }
+
+
+    private List<Integer> list = new ArrayList<>();
+
+    private void addValue(int value) {
+        list.add(value);
+        if(list.size() > 3) {
+            list.remove(0);
+        }
+    }
+
+    private int getValue() {
+        return list.get(0);
     }
 
 
@@ -228,32 +259,37 @@ public class FlingLayout extends FrameLayout {
         if (child instanceof Pullable && mPullView == null) {
             mPullView = (PullableScrollView) child;
             mPullView.setOverScrollMode(View.OVER_SCROLL_NEVER);
+            mPullView.setVerticalScrollBarEnabled(false);
             mPullView.setScrollViewListener(new PullableScrollView.ScrollViewListener() {
                 @Override
                 public void onScrollChanged(int l, final int t, int oldl, final int oldt) {
+                    Log.e("TAG", "time" + System.currentTimeMillis());
                     Log.e("TAG", "t:" + t + " ---oldt:" + oldt);
                     if(isActionUp) {
+                        addValue(t - oldt);
                         if(mPullView.isGetTop()) {
                             //startScrollBy(0, -100);
                             //Log.e("TAG", "speed:" + mPullView.getVerticalScrollSpeed());
                             //Log.e("vvvv", "ttt:" + mOffsetTop);
-                            int time = startScrollBy(mOffsetTop, (int)((t - oldt) * 1.5));
+                            //getValue();
+                            //int time = startScrollBy(mOffsetTop, (int)((t - oldt) * 1.5));
+                            int time = startScrollBy2(mOffsetTop, getValue());
                             postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    startScrollBy((int)((t - oldt) * 1.5), (int)((oldt - t) * 1.5));
+                                    startScrollBy2(getValue(), -getValue());
                                 }
                             }, time);
                             //calculateSpeed();
                             //mPullView.getScaleY();
                         }
                         if(mPullView.isGetBottom()) {
-
-                            int time = startScrollBy(mOffsetTop, (int)((t - oldt) * 1.5));
+                            int time = startScrollBy2(mOffsetTop, getValue());
+                            //int time = startScrollBy(mOffsetTop, (int)((t - oldt) * 1.5));
                             postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    startScrollBy((int)((t - oldt) * 1.5), (int)((oldt - t) * 1.5));
+                                    startScrollBy2(getValue(), -getValue());
                                 }
                             }, time);
                             //Log.e("TAG", "speed:" + mPullView.getVerticalScrollSpeed());

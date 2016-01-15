@@ -22,16 +22,12 @@
 package com.sym.view;
 
 import android.content.Context;
-import android.os.Handler;
-import android.os.Message;
 import android.util.AttributeSet;
 import android.widget.ScrollView;
 
 public class PullableScrollView extends ScrollView implements Pullable {
 
     private ScrollViewListener scrollViewListener;
-
-    private float verticalScrollSpeed;
 
     public PullableScrollView(Context context) {
         super(context);
@@ -45,40 +41,22 @@ public class PullableScrollView extends ScrollView implements Pullable {
         super(context, attrs, defStyle);
     }
 
-    public float getVerticalScrollSpeed() {
-        return this.verticalScrollSpeed;
-    }
-
     public void setScrollViewListener(ScrollViewListener scrollViewListener) {
         this.scrollViewListener = scrollViewListener;
     }
 
     @Override
     protected void onScrollChanged(int l, int t, int oldl, int oldt) {
-        calculateVerticalScrollSpeed(t, oldt);
         super.onScrollChanged(l, t, oldl, oldt);
         if(this.scrollViewListener != null) {
             scrollViewListener.onScrollChanged(l, t, oldl, oldt);
         }
     }
 
-    private void calculateVerticalScrollSpeed(int t, int oldt) {
-        float originalVerticalScrollSpeed = (float) (t - oldt) / 0.017f;;
-        this.verticalScrollSpeed = originalVerticalScrollSpeed / 50;
-    }
-
-
     @Override
     protected int computeVerticalScrollOffset() {
         return super.computeVerticalScrollOffset();
     }
-
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            super.handleMessage(msg);
-        }
-    };
 
     @Override
     public boolean isGetTop() {
