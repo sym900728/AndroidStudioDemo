@@ -66,6 +66,11 @@ public class CircleView extends View {
         mRadius = Math.min(mCenterX, mCenterY);
     }
 
+    @Override
+    public void layout(int l, int t, int r, int b) {
+        super.layout(l, t, r, b);
+    }
+
     public void setColor(final int colorValue) {
         mPaint.setColor(colorValue);
         invalidate();

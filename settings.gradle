@@ -1,1 +1,1 @@
-include ':app', ':demolockpattern', ':demoscroller'
+include ':app', ':demolockpattern', ':demoscroller', ':demodynamicload', ':demogreendao', ':demogreendaogenerator', ':demoleakcanary', ':demoretrofit', ':demopicasso', ':demoglide', ':democropper', ':demotabhost', ':demookhttp', ':demozxing', ':demoim', ':onesdk'

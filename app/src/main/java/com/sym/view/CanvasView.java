@@ -6,6 +6,8 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.view.View;
+import android.widget.EditText;
+import android.widget.RelativeLayout;
 
 /**
  * Created by Administrator on 2015/12/29.
@@ -20,6 +22,18 @@ public class CanvasView extends View{
         super(context);
         init();
     }
+
+
+    public void test() {
+        EditText editText = new EditText(getContext());
+        RelativeLayout.LayoutParams lp = (RelativeLayout.LayoutParams) editText.getLayoutParams();
+        lp.addRule(RelativeLayout.CENTER_VERTICAL, RelativeLayout.TRUE);
+        lp.addRule(RelativeLayout.ALIGN_PARENT_LEFT, RelativeLayout.TRUE);
+        //addView(editText);
+    }
+
+
+
 
     private void init() {
         defaultPaint = new Paint();
