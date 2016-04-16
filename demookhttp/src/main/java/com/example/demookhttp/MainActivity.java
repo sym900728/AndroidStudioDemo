@@ -45,7 +45,7 @@ public class MainActivity extends Activity {
 
             @Override
             public void onResponse(Call call, Response response) throws IOException {
-                Log.e(TAG, "resonse body " + response.body().string().toString());
+                Log.e(TAG, "response body " + response.body().string().toString());
             }
         });
 

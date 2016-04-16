@@ -23,7 +23,7 @@
         <activity android:name="com.sym.activity.TestUniversalImageLoaderListViewActivity" />
         <activity android:name="com.sym.activity.TestAndroidAsyncHttpActivity" />
         <activity android:name="com.sym.activity.BaseActivity" />
-        <activity android:name="com.sym.activity.GridueActivity" />
+        <activity android:name="com.sym.activity.GuideActivity" />
         <activity android:name="com.sym.activity.TestRubberIndicatorActivity" />
         <activity android:name="com.sym.activity.TestBounceScrollViewActivity" />
         <activity android:name="com.sym.activity.TestSecondBounceScrollViewActivity" />
